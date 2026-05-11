@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { Suspense, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import {
   ArrowLeft,
@@ -11,7 +11,7 @@ import {
   Wallet,
 } from "lucide-react";
 
-export default function PaymentPage() {
+function PaymentContent() {
   const searchParams = useSearchParams();
   const [loading, setLoading] = useState(false);
 
@@ -111,5 +111,19 @@ export default function PaymentPage() {
         </div>
       </section>
     </main>
+  );
+}
+
+export default function PaymentPage() {
+  return (
+    <Suspense
+      fallback={
+        <main className="min-h-screen bg-black text-white flex items-center justify-center">
+          Cargando pago...
+        </main>
+      }
+    >
+      <PaymentContent />
+    </Suspense>
   );
 }
