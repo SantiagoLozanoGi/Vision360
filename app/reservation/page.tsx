@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
@@ -74,6 +73,7 @@ export default function ReservationPage() {
         plate: plate.toUpperCase(),
         user_name: userName,
         parking_name: parking.name,
+        parking_id: parking.id,
         reservation_time: reservationTime,
         status: "ACTIVE",
       })
@@ -88,7 +88,7 @@ export default function ReservationPage() {
       return;
     }
 
-    window.location.href = `/payment?reservation=${data.id}&parking=${parking.id}&total=${totalPrice}`;
+    window.location.href = `/payment?reservation=${data.id}&parking=${data.parking_id}&total=${totalPrice}`;
   }
 
   if (!parking) {
@@ -148,6 +148,7 @@ export default function ReservationPage() {
                 <Car size={16} />
                 Placa del vehículo
               </label>
+
               <input
                 value={plate}
                 onChange={(e) => setPlate(e.target.value)}
@@ -160,6 +161,7 @@ export default function ReservationPage() {
               <label className="text-gray-300 text-sm mb-2 block">
                 Nombre del usuario
               </label>
+
               <input
                 value={userName}
                 onChange={(e) => setUserName(e.target.value)}
@@ -173,6 +175,7 @@ export default function ReservationPage() {
                 <CalendarClock size={16} />
                 Hora de reserva
               </label>
+
               <input
                 type="datetime-local"
                 value={reservationTime}
@@ -187,6 +190,7 @@ export default function ReservationPage() {
                   <Clock size={16} />
                   Duración
                 </label>
+
                 <span className="bg-blue-500/20 text-blue-300 px-4 py-2 rounded-full">
                   {duration} hora{duration > 1 ? "s" : ""}
                 </span>
